@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        //Bloquea el cursor (hace q no se vea)
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void HandleMovement()

@@ -15,5 +15,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Update()
     {
         agent.SetDestination(target.position);
+        //Liberar el cursor cuando se presiona esc
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
