@@ -1237,7 +1237,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 250
+  m_Speed: 100
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1249,33 +1249,6 @@ NavMeshAgent:
   m_BaseOffset: 1.0000002
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &1933790035
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1933790027}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!1001 &642657521822383876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1310,7 +1283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1207668353333030502, guid: 7ddfdfbe60410a94eaea5366096c7ea5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 82.1
       objectReference: {fileID: 0}
     - target: {fileID: 1207668353333030502, guid: 7ddfdfbe60410a94eaea5366096c7ea5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1355,9 +1328,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1074819208275877064, guid: 7ddfdfbe60410a94eaea5366096c7ea5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1933790034}
-    - targetCorrespondingSourceObject: {fileID: 1074819208275877064, guid: 7ddfdfbe60410a94eaea5366096c7ea5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1933790035}
   m_SourcePrefab: {fileID: 100100000, guid: 7ddfdfbe60410a94eaea5366096c7ea5, type: 3}
 --- !u!1001 &7850188203247929240
 PrefabInstance:
