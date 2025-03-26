@@ -1,9 +1,6 @@
 # Forge-and-Dungeons
 
 Mobs:
-      -Murcielago  -Ataque       Bajo        Drops:  Mineral de carbon 100%               Comportamiento: Al spawnear vuela en dirección al personaje esquivando obstaculos. 
-                    Velocidad    Alta                Ala de murcielago  25%                               Al estar en contacto con el personaje hace daño. Un ataque por segundo.
-                    Defensa      Baja                Debilidad => Agua (+25% daño)
 
       -Bicho Bola  -Ataque       Alto        Drops:  Mineral de hierro     100%           Comportamiento: Al spawnear camina de manera aleatoria en cualquier dirección. Una vez entra en rango de detección se mueve hacia el personaje.
                     Velocidad    Baja                Caparazón de hierro    25%                           Una vez en rango de ataque se para en el sitio y golpea en la dirección en la que esté mirando. Tiempo entre ataques alto.
@@ -20,3 +17,7 @@ Mobs:
       -Zombies      -Ataque      Medio       Drops:  Nada                                 Comportamiento: Spawnean al entrar en un area designada. Una vez spawnean persiguen al personaje. 
                      Velocidad   Media                                                                    Al entrar en rango de ataque realiza 3 ataques en dirección al personaje. No se alejan mucho de su area de spawn.
                      Defensa     Media               Debilidad => Nada
+
+      -Murcielago  -Ataque       Bajo        Drops:  Mineral de carbon 100%               Comportamiento: Al spawnear vuela en dirección al personaje esquivando obstaculos. 
+                    Velocidad    Alta                Ala de murcielago  25%                               Al estar en contacto con el personaje hace daño. Un ataque por segundo.
+                    Defensa      Baja                Debilidad => Agua (+25% daño)
