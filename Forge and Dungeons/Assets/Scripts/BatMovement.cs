@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-
     [SerializeField] Transform target;
     NavMeshAgent agent;
 

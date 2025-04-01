@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Velocidad de movimiento
+    [SerializeField] float moveSpeed; // Velocidad de movimiento
     private Vector3 moveDirection;
 
     private void Update()
