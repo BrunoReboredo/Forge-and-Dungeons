@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 public class BatSpawner : MonoBehaviour
 {
-
     public GameObject enemyPrefab; // Prefab del enemigo
     public Transform player; // Referencia al jugador
     public Camera playerCamera; // Cámara del jugador
@@ -16,13 +15,14 @@ public class BatSpawner : MonoBehaviour
 
     private float spawnDistance = 8f; // Distancia alrededor de la cámara donde spawnearán los enemigos
     private float spawnHeight = 2f; // Altura a la que aparecerán los murciélagos
+    private float maxAttempts = 10f; // Número máximo de intentos para encontrar una posición válida
 
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        StartCoroutine(SpawnBats());
     }
 
-    IEnumerator SpawnEnemies()
+    IEnumerator SpawnBats()
     {
         while (true)
         {
@@ -32,26 +32,38 @@ public class BatSpawner : MonoBehaviour
 
             for (int i = 0; i < enemiesToSpawn; i++)
             {
-                SpawnEnemy();
+                SpawnBat();
             }
         }
     }
 
-    void SpawnEnemy()
+    void SpawnBat()
     {
         Vector3 spawnPosition = GetSpawnPosition();
-
-        // Buscar una posición válida en la NavMesh cerca del punto de spawn
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(spawnPosition, out hit, 5.0f, NavMesh.AllAreas))
+        int attempts = 0;
+
+        // Intentar encontrar una posición válida para el enemigo
+        while (attempts < maxAttempts)
         {
-            spawnPosition = hit.position; // Ajustar a la posición válida
-            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            if (NavMesh.SamplePosition(spawnPosition, out hit, 10.0f, NavMesh.AllAreas)) // Aumentar el rango de búsqueda
+            {
+                spawnPosition = hit.position; // Ajustar a la posición válida en el suelo
+                spawnPosition.y += spawnHeight; // Elevar al enemigo
+
+                GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                return; // Si encontró una posición válida, instanciar el enemigo y salir
+            }
+            else
+            {
+                // Si no se encuentra una posición válida, recalcular la posición
+                spawnPosition = GetSpawnPosition();
+                attempts++; // Incrementar el contador de intentos
+            }
         }
-        else
-        {
-            Debug.LogWarning("No se encontró una posición válida en la NavMesh para el enemigo.");
-        }
+
+        // Si no se pudo encontrar una posición válida tras varios intentos, mostrar advertencia
+        Debug.LogWarning("No se pudo encontrar una posición válida para el murcielago después de varios intentos.");
     }
 
     Vector3 GetSpawnPosition()
@@ -75,6 +87,7 @@ public class BatSpawner : MonoBehaviour
             spawnZ = Random.Range(cameraPos.z - cameraSizeY - spawnDistance, cameraPos.z + cameraSizeY + spawnDistance);
         }
 
-        return new Vector3(spawnX, player.position.y + spawnHeight, spawnZ); // Spawnea en el aire
+        // Establecer la posición inicial en el suelo (y = 0)
+        return new Vector3(spawnX, 0f, spawnZ); // Spawnea a nivel del suelo (y = 0)
     }
 }
