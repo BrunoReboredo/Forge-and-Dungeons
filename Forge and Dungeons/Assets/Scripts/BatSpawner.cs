@@ -13,8 +13,8 @@ public class BatSpawner : MonoBehaviour
     public float spawnIntervalMin = 10f;
     public float spawnIntervalMax = 15f;
 
-    private float spawnDistance = 10f; // Distancia alrededor de la cámara donde spawnearán los enemigos
-    private float spawnHeight = 5f; // Altura a la que aparecerán los murciélagos
+    private float spawnDistance = 8f; // Distancia alrededor de la cámara donde spawnearán los enemigos
+    private float spawnHeight = 2f; // Altura a la que aparecerán los murciélagos
 
     void Start()
     {
