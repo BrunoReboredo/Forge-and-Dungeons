@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BatSpawner : MonoBehaviour
 {
@@ -8,9 +9,9 @@ public class BatSpawner : MonoBehaviour
     public Transform player; // Referencia al jugador
     public Camera playerCamera; // Cámara del jugador
 
-    public int minEnemiesPerSpawn = 1;
-    public int maxEnemiesPerSpawn = 3;
-    public float spawnIntervalMin = 10f;
+    public int minEnemiesPerSpawn = 2;
+    public int maxEnemiesPerSpawn = 5;
+    public float spawnIntervalMin = 8f;
     public float spawnIntervalMax = 15f;
 
     private float spawnDistance = 8f; // Distancia alrededor de la cámara donde spawnearán los enemigos
@@ -39,7 +40,18 @@ public class BatSpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Vector3 spawnPosition = GetSpawnPosition();
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+        // Buscar una posición válida en la NavMesh cerca del punto de spawn
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(spawnPosition, out hit, 5.0f, NavMesh.AllAreas))
+        {
+            spawnPosition = hit.position; // Ajustar a la posición válida
+            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró una posición válida en la NavMesh para el enemigo.");
+        }
     }
 
     Vector3 GetSpawnPosition()
