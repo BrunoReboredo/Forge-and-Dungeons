@@ -204,7 +204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 100
+  rotationSpeed: 200
   capsulePrefab: {fileID: 8954734767804815076, guid: e259c53a241ab8c4e8b82b418d992515, type: 3}
+  capsuleDistance: 1
 --- !u!23 &47917943
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -2,26 +2,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f; // Velocidad de movimiento
-    [SerializeField] GameObject capsulePrefab; // Prefab del "palo"
-    [SerializeField] float capsuleDistance = 1f; // Distancia del palo respecto al jugador
-    private GameObject capsuleInstance; // Instancia del palo
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float rotationSpeed = 200f;
+    [SerializeField] GameObject capsulePrefab; // El "palo"
+    [SerializeField] float capsuleDistance = 1f; // Distancia delante del jugador
+
     private Vector3 moveDirection;
+    private GameObject capsuleInstance;
 
     private void Start()
     {
-        // Instanciamos el palo y lo rotamos en horizontal
         if (capsulePrefab != null)
         {
             capsuleInstance = Instantiate(capsulePrefab, transform.position + transform.forward * capsuleDistance, Quaternion.identity);
-            capsuleInstance.transform.SetParent(transform); // Lo hacemos hijo del jugador
-            capsuleInstance.transform.rotation = Quaternion.Euler(0, 0, 90); // Gira la cápsula en horizontal
+            capsuleInstance.transform.SetParent(transform); // El palo sigue al jugador
+            capsuleInstance.transform.rotation = Quaternion.Euler(0, 0, 90); // Poner en horizontal (ajustar si necesario)
         }
     }
 
     private void Update()
     {
         HandleMovement();
+        HandleMouseRotation();
         UpdateCapsulePosition();
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -31,28 +33,31 @@ public class PlayerController : MonoBehaviour
         float moveX = 0f;
         float moveZ = 0f;
 
-        if (Input.GetKey(KeyCode.W)) moveZ = 1f;  // Adelante
-        if (Input.GetKey(KeyCode.S)) moveZ = -1f; // Atrás
-        if (Input.GetKey(KeyCode.A)) moveX = -1f; // Izquierda
-        if (Input.GetKey(KeyCode.D)) moveX = 1f;  // Derecha
+        if (Input.GetKey(KeyCode.W)) moveZ = 1f;
+        if (Input.GetKey(KeyCode.S)) moveZ = -1f;
+        if (Input.GetKey(KeyCode.A)) moveX = -1f;
+        if (Input.GetKey(KeyCode.D)) moveX = 1f;
 
-        moveDirection = new Vector3(moveX, 0, moveZ).normalized;
+        moveDirection = new Vector3(moveX, 0f, moveZ).normalized;
 
-        if (moveDirection != Vector3.zero)
-        {
-            transform.position += moveDirection * moveSpeed * Time.deltaTime;
-            transform.forward = moveDirection; // Hace que el personaje mire hacia donde se mueve
-        }
+        transform.position += moveDirection * moveSpeed * Time.deltaTime;
+    }
+
+    private void HandleMouseRotation()
+    {
+        float mouseX = Input.GetAxis("Mouse X");
+        transform.Rotate(Vector3.up * mouseX * rotationSpeed * Time.deltaTime);
     }
 
     private void UpdateCapsulePosition()
     {
         if (capsuleInstance != null)
         {
-            // Posiciona el palo delante del jugador
             capsuleInstance.transform.position = transform.position + transform.forward * capsuleDistance;
-            capsuleInstance.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90); // Mantiene el palo en horizontal
+            capsuleInstance.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90); // Mantenerlo en horizontal
         }
     }
 }
+
+
 
