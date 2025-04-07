@@ -4,20 +4,14 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotationSpeed = 200f;
-    [SerializeField] GameObject capsulePrefab; // El "palo"
-    [SerializeField] float capsuleDistance = 1f; // Distancia delante del jugador
+    [SerializeField] float capsuleDistance = 10f; // Distancia delante del jugador
 
     private Vector3 moveDirection;
     private GameObject capsuleInstance;
 
     private void Start()
     {
-        if (capsulePrefab != null)
-        {
-            capsuleInstance = Instantiate(capsulePrefab, transform.position + transform.forward * capsuleDistance, Quaternion.identity);
-            capsuleInstance.transform.SetParent(transform); // El palo sigue al jugador
-            capsuleInstance.transform.rotation = Quaternion.Euler(0, 0, 90); // Poner en horizontal (ajustar si necesario)
-        }
+
     }
 
     private void Update()
