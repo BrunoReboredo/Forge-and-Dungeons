@@ -5,9 +5,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float rotationSpeed = 200f;
     [SerializeField] float capsuleDistance = 10f; // Distancia delante del jugador
+    [SerializeField] GameObject lanternPrefab; // Prefab de la linterna
 
     private Vector3 moveDirection;
     private GameObject capsuleInstance;
+    private GameObject lanternInstance;
+    private bool lanternOn = false;
 
     private void Start()
     {
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleMouseRotation();
         UpdateCapsulePosition();
+        HandleLanternToggle();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -49,6 +53,27 @@ public class PlayerController : MonoBehaviour
         {
             capsuleInstance.transform.position = transform.position + transform.forward * capsuleDistance;
             capsuleInstance.transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 90); // Mantenerlo en horizontal
+        }
+    }
+
+    private void HandleLanternToggle()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("se ha pulsado la letra I para la luz");
+            if (lanternInstance == null)
+            {
+                // Instanciamos la linterna por primera vez
+                lanternInstance = Instantiate(lanternPrefab, transform);
+                lanternInstance.transform.localPosition = new Vector3(0, 0, 1f); // Ajusta esta posición según tu jugador
+                lanternOn = true;
+            }
+            else
+            {
+                // Activamos/desactivamos la linterna
+                lanternOn = !lanternOn;
+                lanternInstance.SetActive(lanternOn);
+            }
         }
     }
 }
