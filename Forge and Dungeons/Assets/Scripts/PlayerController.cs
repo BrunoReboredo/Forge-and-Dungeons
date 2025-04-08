@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Instanciamos la linterna por primera vez
                 lanternInstance = Instantiate(lanternPrefab, transform);
-                lanternInstance.transform.localPosition = new Vector3(0, 0, 1f); // Ajusta esta posición según tu jugador
+                lanternInstance.transform.localPosition = new Vector3(0, 0, 1f);
                 lanternOn = true;
             }
             else

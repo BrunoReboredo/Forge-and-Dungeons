@@ -5,7 +5,7 @@ public enum ItemCategory
     Mineral,
     EnemyDrop,
 
-    // Puedes añadir más si necesario
+    // Añadir más si necesario
 
 }
 

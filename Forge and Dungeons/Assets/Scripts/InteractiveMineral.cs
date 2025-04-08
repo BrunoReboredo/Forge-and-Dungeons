@@ -40,7 +40,7 @@ public class InteractiveMineral : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
-            StopMining(); // Detener minería si se aleja
+            StopMining(); // Detener minería si se aleja del trigger
             ShowMessage(false);
         }
     }

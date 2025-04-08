@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        // Aquí puedes poner efectos de muerte más adelante
+        // Poner efectos de muerte más adelante
         Destroy(gameObject);
     }
 }

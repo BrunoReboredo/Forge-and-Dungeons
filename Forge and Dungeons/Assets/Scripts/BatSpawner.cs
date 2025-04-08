@@ -43,7 +43,7 @@ public class BatSpawner : MonoBehaviour
         NavMeshHit hit;
         int attempts = 0;
 
-        // Intentar encontrar una posición válida para el enemigo
+        // Intenta encontrar una posición válida para el enemigo
         while (attempts < maxAttempts)
         {
             if (NavMesh.SamplePosition(spawnPosition, out hit, 10.0f, NavMesh.AllAreas)) // Aumentar el rango de búsqueda
@@ -88,6 +88,6 @@ public class BatSpawner : MonoBehaviour
         }
 
         // Establecer la posición inicial en el suelo (y = 0)
-        return new Vector3(spawnX, 0f, spawnZ); // Spawnea a nivel del suelo (y = 0)
+        return new Vector3(spawnX, 90f, spawnZ); // Spawnea a nivel del suelo (y = 90)
     }
 }

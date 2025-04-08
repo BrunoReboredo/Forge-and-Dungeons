@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
-    [SerializeField] string targetTag = "Player"; // Etiqueta del objetivo
+    [SerializeField] string targetTag = "Player";
     NavMeshAgent agent;
     Transform target;
 
