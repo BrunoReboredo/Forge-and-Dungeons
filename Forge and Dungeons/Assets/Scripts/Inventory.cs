@@ -5,6 +5,11 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
 
+    // Para abrir el inventario
+    [SerializeField] GameObject inventoryUI;
+
+    private bool isInventoryOpen = false;
+
     [System.Serializable]
     public class InventorySlot
     {
