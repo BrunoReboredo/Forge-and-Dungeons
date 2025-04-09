@@ -1,12 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class Inventory : MonoBehaviour
 {
     public static Inventory Instance;
 
-    // Para abrir el inventario
     [SerializeField] GameObject inventoryUI;
+    [SerializeField] GameObject slotInventoryPrefab;
+    [SerializeField] Transform slotsParent;
+    [SerializeField] Image backgroundImage; // Imagen de fondo
+    [SerializeField] Vector2 cellSize = new Vector2(30, 30); // Tamaño de la celda (30x30 píxeles)
 
     private bool isInventoryOpen = false;
 
@@ -24,13 +28,20 @@ public class Inventory : MonoBehaviour
     }
 
     public List<InventorySlot> slots = new List<InventorySlot>();
-    public int maxSlots = 20;
+    public int maxSlots = 15;  // Modificable el número de slots
     public int maxStackSize = 25;
+    public int slotsPerRow = 5;  // Cuántos slots por fila (para calcular el tamaño del fondo)
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        // Asegúrate de que el inventario esté cerrado al inicio
+        inventoryUI.SetActive(false);
     }
 
     void Update()
@@ -43,26 +54,21 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item newItem)
     {
-        // Buscar si ya hay un slot con el mismo tipo de ítem y con espacio
         foreach (var slot in slots)
         {
             if (slot.item.type == newItem.type && slot.quantity < maxStackSize)
             {
                 slot.quantity++;
-                Debug.Log("Añadido al stack existente: " + newItem.itemName + " (x" + slot.quantity + ")");
                 return true;
             }
         }
 
-        // Si no hay stack disponible, crear uno nuevo si hay espacio
         if (slots.Count >= maxSlots)
         {
-            Debug.Log("Inventario lleno");
             return false;
         }
 
         slots.Add(new InventorySlot(newItem, 1));
-        Debug.Log("Objeto añadido en nuevo slot: " + newItem.itemName);
         return true;
     }
 
@@ -73,7 +79,6 @@ public class Inventory : MonoBehaviour
             if (slots[i].item.type == type)
             {
                 slots[i].quantity -= amount;
-                Debug.Log($"Quitado {amount} de {type} - Restante: {slots[i].quantity}");
 
                 if (slots[i].quantity <= 0)
                     slots.RemoveAt(i);
@@ -81,24 +86,79 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
-
-        Debug.LogWarning("No se encontró el ítem para remover: " + type);
     }
 
     public void ShowInventory()
     {
-        if (slots.Count == 0)
+        if (!isInventoryOpen)
         {
-            Debug.Log("Inventario vacío");
-            return;
-        }
+            inventoryUI.SetActive(true);
+            isInventoryOpen = true;
 
-        Debug.Log("=== Inventario ===");
-        foreach (var slot in slots)
+            // Limpiar cualquier slot existente
+            foreach (Transform child in slotsParent)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // Crear los slots y ajustar el fondo
+            int slotsToCreate = maxSlots;
+
+            for (int i = 0; i < slotsToCreate; i++)
+            {
+                GameObject newSlot = Instantiate(slotInventoryPrefab, slotsParent);
+
+                Image slotIcon = newSlot.GetComponentInChildren<Image>();
+                Text slotQuantity = newSlot.GetComponentInChildren<Text>();
+
+                if (i < slots.Count)
+                {
+                    InventorySlot currentSlot = slots[i];
+
+                    if (slotIcon != null)
+                    {
+                        slotIcon.sprite = currentSlot.item.icon;
+                    }
+
+                    if (slotQuantity != null)
+                    {
+                        slotQuantity.text = currentSlot.quantity.ToString();
+                    }
+                }
+                else
+                {
+                    if (slotIcon != null)
+                    {
+                        slotIcon.sprite = null;
+                    }
+
+                    if (slotQuantity != null)
+                    {
+                        slotQuantity.text = "";
+                    }
+                }
+            }
+
+            // Ajustar el fondo al tamaño de los slots
+            AdjustBackgroundSize(slotsToCreate);
+        }
+        else
         {
-            Debug.Log($"- {slot.item.itemName} x{slot.quantity} [{slot.item.category}]");
+            inventoryUI.SetActive(false);
+            isInventoryOpen = false;
         }
     }
+
+    private void AdjustBackgroundSize(int slotsToCreate)
+    {
+        // Calcular cuántas filas de slots necesitamos
+        int rows = Mathf.CeilToInt((float)slotsToCreate / slotsPerRow);
+
+        // Ajustar el tamaño del fondo de acuerdo con el número de filas y columnas
+        float backgroundWidth = slotsPerRow * cellSize.x; // Número de columnas * tamaño de la celda
+        float backgroundHeight = rows * cellSize.y; // Número de filas * tamaño de la celda
+
+        // Ajustar el tamaño del fondo
+        backgroundImage.rectTransform.sizeDelta = new Vector2(backgroundWidth, backgroundHeight);
+    }
 }
-
-
