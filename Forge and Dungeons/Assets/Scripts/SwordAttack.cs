@@ -27,6 +27,13 @@ public class SwordAttack : MonoBehaviour
                 // Destruye el prefab a los 3 segundos
                 Destroy(arrowInstance, 3f);
 
+                // Daño de prueba
+                playerStats.TakeDamage(10f);
+
+                // Carga de especial
+                playerStats.AddSpecialCharge(25f);
+
+
             }
             else
             {

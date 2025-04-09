@@ -70,13 +70,10 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // Activamos/desactivamos la linterna
+                // Activar/desactivar la linterna
                 lanternOn = !lanternOn;
                 lanternInstance.SetActive(lanternOn);
             }
         }
     }
 }
-
-
-

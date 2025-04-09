@@ -3,16 +3,19 @@ using UnityEngine.UI;
 
 public class PlayerHUD : MonoBehaviour
 {
-    public Slider healthBar;
-    public Slider abilityBar;
+    [Header("Sliders")]
+    public Slider healthSlider;
+    public Slider specialSlider;
 
-    public void SetHealth(float current, float max)
-    {
-        healthBar.value = current / max;
-    }
+    [Header("Player Stats")]
+    public PlayerStats playerStats;
 
-    public void SetAbilityCharge(float current, float max)
+    void Update()
     {
-        abilityBar.value = current / max;
+        if (playerStats != null)
+        {
+            healthSlider.value = playerStats.currentHealth / playerStats.maxHealth;
+            specialSlider.value = playerStats.currentSpecial / playerStats.maxSpecial;
+        }
     }
 }
