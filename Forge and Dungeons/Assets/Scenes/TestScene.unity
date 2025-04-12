@@ -484,15 +484,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 50
+    m_Right: 50
+    m_Top: 15
+    m_Bottom: 25
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 120, y: 120}
-  m_Spacing: {x: 5, y: 5}
+  m_CellSize: {x: 200, y: 200}
+  m_Spacing: {x: 200, y: 50}
   m_Constraint: 1
   m_ConstraintCount: 5
 --- !u!1 &70836861
@@ -729,7 +729,7 @@ MonoBehaviour:
   cellSize: {x: 15, y: 15}
   playerController: {fileID: 47917942}
   slots: []
-  maxSlots: 15
+  maxSlots: 20
   maxStackSize: 12
   slotsPerRow: 5
 --- !u!4 &131659498
@@ -3911,7 +3911,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6698113, g: 0.42021182, b: 0.42021182, a: 0.5176471}
+  m_Color: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0.5176471}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
