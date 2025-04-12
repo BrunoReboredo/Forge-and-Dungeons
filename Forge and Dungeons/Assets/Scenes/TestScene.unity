@@ -727,6 +727,7 @@ MonoBehaviour:
   slotsParent: {fileID: 68399084}
   backgroundImage: {fileID: 1731289707}
   cellSize: {x: 10, y: 10}
+  playerController: {fileID: 47917942}
   slots: []
   maxSlots: 15
   maxStackSize: 12
@@ -3809,7 +3810,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 2
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

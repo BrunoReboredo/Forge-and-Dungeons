@@ -9,8 +9,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] GameObject inventoryUI;
     [SerializeField] GameObject slotInventoryPrefab;
     [SerializeField] Transform slotsParent;
-    [SerializeField] Image backgroundImage; // Imagen de fondo
-    [SerializeField] Vector2 cellSize = new Vector2(30, 30); // Tamaño de la celda (30x30 píxeles)
+    [SerializeField] Image backgroundImage;
+    [SerializeField] Vector2 cellSize = new Vector2(30, 30);
+
+    [SerializeField] MonoBehaviour playerController; // <-- Referencia al script del jugador (PlayerMovement, PlayerAttack...)
 
     private bool isInventoryOpen = false;
 
@@ -28,9 +30,9 @@ public class Inventory : MonoBehaviour
     }
 
     public List<InventorySlot> slots = new List<InventorySlot>();
-    public int maxSlots = 15;  // Modificable el número de slots
+    public int maxSlots = 15;
     public int maxStackSize = 25;
-    public int slotsPerRow = 5;  // Cuántos slots por fila (para calcular el tamaño del fondo)
+    public int slotsPerRow = 5;
 
     void Awake()
     {
@@ -40,15 +42,16 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        // Asegúrate de que el inventario esté cerrado al inicio
         inventoryUI.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            ShowInventory();
+            ToggleInventory();
         }
     }
 
@@ -63,10 +66,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (slots.Count >= maxSlots)
-        {
-            return false;
-        }
+        if (slots.Count >= maxSlots) return false;
 
         slots.Add(new InventorySlot(newItem, 1));
         return true;
@@ -88,77 +88,65 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void ShowInventory()
+    public void ToggleInventory()
     {
-        if (!isInventoryOpen)
+        isInventoryOpen = !isInventoryOpen;
+
+        inventoryUI.SetActive(isInventoryOpen);
+
+        // Activar/desactivar control del jugador
+        if (playerController != null)
+            playerController.enabled = !isInventoryOpen;
+
+        // Mostrar/ocultar cursor
+        Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isInventoryOpen;
+
+        if (isInventoryOpen)
         {
-            inventoryUI.SetActive(true);
-            isInventoryOpen = true;
-
-            // Limpiar cualquier slot existente
-            foreach (Transform child in slotsParent)
-            {
-                Destroy(child.gameObject);
-            }
-
-            // Crear los slots y ajustar el fondo
-            int slotsToCreate = maxSlots;
-
-            for (int i = 0; i < slotsToCreate; i++)
-            {
-                GameObject newSlot = Instantiate(slotInventoryPrefab, slotsParent);
-
-                Image slotIcon = newSlot.GetComponentInChildren<Image>();
-                Text slotQuantity = newSlot.GetComponentInChildren<Text>();
-
-                if (i < slots.Count)
-                {
-                    InventorySlot currentSlot = slots[i];
-
-                    if (slotIcon != null)
-                    {
-                        slotIcon.sprite = currentSlot.item.icon;
-                    }
-
-                    if (slotQuantity != null)
-                    {
-                        slotQuantity.text = currentSlot.quantity.ToString();
-                    }
-                }
-                else
-                {
-                    if (slotIcon != null)
-                    {
-                        slotIcon.sprite = null;
-                    }
-
-                    if (slotQuantity != null)
-                    {
-                        slotQuantity.text = "";
-                    }
-                }
-            }
-
-            // Ajustar el fondo al tamaño de los slots
-            AdjustBackgroundSize(slotsToCreate);
+            UpdateInventoryUI();
         }
-        else
+    }
+
+    private void UpdateInventoryUI()
+    {
+        foreach (Transform child in slotsParent)
         {
-            inventoryUI.SetActive(false);
-            isInventoryOpen = false;
+            Destroy(child.gameObject);
         }
+
+        for (int i = 0; i < maxSlots; i++)
+        {
+            GameObject newSlot = Instantiate(slotInventoryPrefab, slotsParent);
+
+            Image slotIcon = newSlot.transform.Find("Icon")?.GetComponent<Image>();
+            Text slotQuantity = newSlot.transform.Find("Quantity")?.GetComponent<Text>();
+
+            if (i < slots.Count)
+            {
+                InventorySlot currentSlot = slots[i];
+
+                if (slotIcon != null)
+                    slotIcon.sprite = currentSlot.item.icon;
+
+                if (slotQuantity != null)
+                    slotQuantity.text = currentSlot.quantity.ToString();
+            }
+            else
+            {
+                if (slotIcon != null) slotIcon.sprite = null;
+                if (slotQuantity != null) slotQuantity.text = "";
+            }
+        }
+
+        AdjustBackgroundSize(maxSlots);
     }
 
     private void AdjustBackgroundSize(int slotsToCreate)
     {
-        // Calcular cuántas filas de slots necesitamos
         int rows = Mathf.CeilToInt((float)slotsToCreate / slotsPerRow);
-
-        // Ajustar el tamaño del fondo de acuerdo con el número de filas y columnas
-        float backgroundWidth = slotsPerRow * cellSize.x; // Número de columnas * tamaño de la celda
-        float backgroundHeight = rows * cellSize.y; // Número de filas * tamaño de la celda
-
-        // Ajustar el tamaño del fondo
-        backgroundImage.rectTransform.sizeDelta = new Vector2(backgroundWidth, backgroundHeight);
+        float width = slotsPerRow * cellSize.x;
+        float height = rows * cellSize.y;
+        backgroundImage.rectTransform.sizeDelta = new Vector2(width, height);
     }
 }
