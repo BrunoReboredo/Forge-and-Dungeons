@@ -5,7 +5,7 @@ public class TitleScreen : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("TestScene");
+        SceneManager.LoadScene("HistoryIntro");
     }
 
     public void LoadGame()
