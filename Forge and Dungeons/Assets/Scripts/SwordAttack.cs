@@ -24,8 +24,9 @@ public class SwordAttack : MonoBehaviour
                 // Instancia el prefab
                 GameObject arrowInstance = Instantiate(PHArrow, attackPoint.position, attackPoint.rotation);
 
-                // Destruye el prefab a los 3 segundos
-                Destroy(arrowInstance, 3f);
+                // Destruye el prefab a los 2 segundos
+                Destroy(arrowInstance, 2f);
+
 
             }
             else
