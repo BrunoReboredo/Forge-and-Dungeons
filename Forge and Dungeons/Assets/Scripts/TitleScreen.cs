@@ -16,8 +16,7 @@ public class TitleScreen : MonoBehaviour
 
     public void OpenOptions()
     {
-        Debug.Log("Abrir opciones");
-        // Aquí se carga las opciones, pendiente de implementar
+        SceneManager.LoadScene("Options");
     }
 
     public void QuitGame()

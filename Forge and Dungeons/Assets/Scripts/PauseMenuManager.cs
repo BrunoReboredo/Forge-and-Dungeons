@@ -1,20 +1,25 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuManager : MonoBehaviour
 {
     public static PauseMenuManager Instance;
 
     [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] private OptionsMenuManager optionsMenuManager;
 
     private bool isPaused = false;
 
     private void Awake()
     {
-        // Aseguramos que solo exista una instancia de PauseMenuManager
         if (Instance == null)
+        {
             Instance = this;
+        }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -57,4 +62,11 @@ public class PauseMenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void OpenOptions()
+    {
+        pauseMenuUI.SetActive(false);
+        optionsMenuManager.OpenOptionsMenu();
+    }
+
 }
