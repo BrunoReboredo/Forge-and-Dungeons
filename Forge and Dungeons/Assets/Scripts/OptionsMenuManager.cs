@@ -20,7 +20,7 @@ public class OptionsMenuManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;  // Desbloquea el cursor
         Cursor.visible = true;  // Hace visible el cursor
 
-        // Desactiva la interfaz del jugador (como la barra de vida, energía, etc.)
+        // Desactiva la interfaz del jugador
         if (playerUI != null)
         {
             playerUI.SetActive(false);
@@ -29,8 +29,8 @@ public class OptionsMenuManager : MonoBehaviour
 
     public void CloseOptionsMenu()
     {
-        optionsMenuUI.SetActive(false);  // Desactiva el menú de opciones
-        Time.timeScale = 1f;  // Restaura el tiempo normal
+        optionsMenuUI.SetActive(false);
+        Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor (ya que vamos de nuevo al menú de pausa)
         Cursor.visible = false;  // Oculta el cursor
 
@@ -41,7 +41,7 @@ public class OptionsMenuManager : MonoBehaviour
         }
         else
         {
-            Cursor.lockState = CursorLockMode.None;  // No bloqueamos el cursor si estamos en el título
+            Cursor.lockState = CursorLockMode.None;
         }
 
         // Vuelve a mostrar la interfaz del jugador cuando se cierra el menú de opciones
@@ -60,14 +60,14 @@ public class OptionsMenuManager : MonoBehaviour
     // Método para cambiar a la pestaña General
     public void ShowGeneralPanel()
     {
-        generalPanel.SetActive(true);  // Muestra el panel de General
-        controlsPanel.SetActive(false);  // Oculta el panel de Controles
+        generalPanel.SetActive(true);
+        controlsPanel.SetActive(false);
     }
 
     // Método para cambiar a la pestaña Controles
     public void ShowControlsPanel()
     {
-        controlsPanel.SetActive(true);  // Muestra el panel de Controles
-        generalPanel.SetActive(false);  // Oculta el panel de General
+        controlsPanel.SetActive(true);
+        generalPanel.SetActive(false);
     }
 }

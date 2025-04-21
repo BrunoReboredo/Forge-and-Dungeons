@@ -4,9 +4,9 @@ using UnityEngine.AI;
 
 public class BatSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab; // Prefab del enemigo
-    public Transform player; // Referencia al jugador
-    public Camera playerCamera; // Cámara del jugador
+    public GameObject enemyPrefab;
+    public Transform player;
+    public Camera playerCamera;
 
     public int minEnemiesPerSpawn = 2;
     public int maxEnemiesPerSpawn = 5;

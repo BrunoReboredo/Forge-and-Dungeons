@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("se ha pulsado la letra I para la luz");
             if (lanternInstance == null)
             {
-                // Instanciamos la linterna por primera vez
+                // Se instancia la linterna por primera vez
                 lanternInstance = Instantiate(lanternPrefab, transform);
                 lanternInstance.transform.localPosition = new Vector3(0, 0, 1f);
                 lanternOn = true;
