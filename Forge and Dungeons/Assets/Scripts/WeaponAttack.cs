@@ -1,23 +1,28 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class WeaponAttack : MonoBehaviour
 {
-    [SerializeField] WeaponStats stats;
+    [SerializeField] private WeaponStats stats;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] GameObject weaponHolder;
+    [Header("Prefabs de armas (combinaciones tipo/material)")]
+    [SerializeField] private List<WeaponModelEntry> weaponPrefabs;
 
-    [Header("Modelos de armas")]
-    [SerializeField] private GameObject swordModelPrefab;
-    [SerializeField] private GameObject spearModelPrefab;
-    [SerializeField] private GameObject axeModelPrefab;
-    [SerializeField] private GameObject hammerModelPrefab;
+
     private float attackCooldown = 0f;
     private GameObject currentWeaponModel;
 
     void Start()
     {
         EquipWeaponModel();
+        WeaponInstance weapon = weaponHolder.GetComponentInChildren<WeaponInstance>();
+        if (weapon != null)
+        {
+            stats = weapon.stats;
+            EquipWeaponModel();
+        }
     }
 
     void Update()
@@ -70,40 +75,28 @@ public class WeaponAttack : MonoBehaviour
 
     void EquipWeaponModel()
     {
-        // Borra el modelo anterior si existe
         if (currentWeaponModel != null)
-        {
             Destroy(currentWeaponModel);
-        }
 
         GameObject modelToEquip = null;
 
-        switch (stats.weaponType)
+        foreach (var entry in weaponPrefabs)
         {
-            case WeaponType.Sword:
-                modelToEquip = swordModelPrefab;
+            if (entry.weaponType == stats.weaponType && entry.materialType == stats.materialType)
+            {
+                modelToEquip = entry.prefab;
                 break;
-            case WeaponType.Spear:
-                modelToEquip = spearModelPrefab;
-                break;
-            case WeaponType.Axe:
-                modelToEquip = axeModelPrefab;
-                break;
-            case WeaponType.Hammer:
-                modelToEquip = hammerModelPrefab;
-                break;
+            }
         }
 
         if (modelToEquip != null && weaponHolder != null)
         {
-            // Instancia el modelo sin parent
             currentWeaponModel = Instantiate(modelToEquip, weaponHolder.transform.position, weaponHolder.transform.rotation);
-            // Luego, asigna el WeaponHolder como su padre
             currentWeaponModel.transform.SetParent(weaponHolder.transform);
         }
         else
         {
-            Debug.LogWarning("Falta asignar el modelo o el weaponHolder.");
+            Debug.LogWarning("No se encontró el prefab para el arma equipada.");
         }
     }
 
@@ -114,5 +107,18 @@ public class WeaponAttack : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPoint.position, stats.range);
+    }
+
+    [System.Serializable]
+    public class WeaponModelEntry
+    {
+        public WeaponType weaponType;
+        public MaterialType materialType;
+        public GameObject prefab;
+    }
+
+    public class WeaponInstance : MonoBehaviour
+    {
+        public WeaponStats stats;
     }
 }

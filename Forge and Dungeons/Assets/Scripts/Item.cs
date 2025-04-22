@@ -4,6 +4,7 @@ public enum ItemCategory
 {
     Mineral,
     EnemyDrop,
+    Weapon
 
     // Añadir más si necesario
 
@@ -15,6 +16,20 @@ public enum ItemType
     Copper,
     Iron,
     Titanium,
+
+    // Armas
+    Sword_Copper,
+    Sword_Iron,
+    Sword_Titanium,
+    Axe_Copper,
+    Axe_Iron,
+    Axe_Titanium,
+    Spear_Copper,
+    Spear_Iron,
+    Spear_Titanium,
+    Hammer_Copper,
+    Hammer_Iron,
+    Hammer_Titanium,
 
     //añadir enemigos cuando se programe sus drops
 }

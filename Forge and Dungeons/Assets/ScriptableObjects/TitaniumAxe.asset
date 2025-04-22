@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7100bdcb17d364caa202687a2bae70, type: 3}
+  m_Name: TitaniumAxe
+  m_EditorClassIdentifier: 
+  weaponType: 2
+  materialType: 2
+  baseDamage: 35
+  range: 8
+  attackRate: 15
+  durability: 320

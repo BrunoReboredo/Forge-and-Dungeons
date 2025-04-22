@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[System.Serializable]
-public class WeaponStats
+[CreateAssetMenu(fileName = "NewWeaponStats", menuName = "Weapons/WeaponStats")]
+public class WeaponStats : ScriptableObject
 {
     public WeaponType weaponType;
     public MaterialType materialType;
