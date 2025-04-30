@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class WeaponAttack : MonoBehaviour
 {
@@ -109,6 +110,12 @@ public class WeaponAttack : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, stats.range);
     }
 
+    internal void SetWeapon(WeaponStats stats)
+    {
+        stats = newStats;
+        EquipWeaponModel();
+    }
+
     [System.Serializable]
     public class WeaponModelEntry
     {
@@ -121,4 +128,7 @@ public class WeaponAttack : MonoBehaviour
     {
         public WeaponStats stats;
     }
+
+
+
 }

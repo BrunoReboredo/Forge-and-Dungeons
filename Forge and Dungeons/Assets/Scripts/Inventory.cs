@@ -11,8 +11,10 @@ public class Inventory : MonoBehaviour
     [SerializeField] Transform slotsParent;
     [SerializeField] Image backgroundImage;
     [SerializeField] Vector2 cellSize = new Vector2(30, 30);
+    public Inventory.InventorySlot slotData; // Aquí tienes acceso a item y quantity
+    public GameObject contextMenuPrefab;
 
-    [SerializeField] MonoBehaviour playerController; // <-- Referencia al script del jugador (PlayerMovement, PlayerAttack...)
+    [SerializeField] MonoBehaviour playerController;
 
     private bool isInventoryOpen = false;
 
@@ -149,4 +151,5 @@ public class Inventory : MonoBehaviour
         float height = rows * cellSize.y;
         backgroundImage.rectTransform.sizeDelta = new Vector2(width, height);
     }
+
 }

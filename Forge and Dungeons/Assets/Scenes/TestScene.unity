@@ -452,8 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c0f9acbccf80947b52e6a214be45e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 0}
-  specialSlider: {fileID: 0}
+  healthSlider: {fileID: 777808221}
+  specialSlider: {fileID: 1207382942}
   playerStats: {fileID: 0}
 --- !u!114 &47917950
 MonoBehaviour:
