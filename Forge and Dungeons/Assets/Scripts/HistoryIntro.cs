@@ -60,7 +60,7 @@ public class HistoryIntro : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("TestScene");
+            SceneManager.LoadScene("EntranceMine");
         }
     }
 

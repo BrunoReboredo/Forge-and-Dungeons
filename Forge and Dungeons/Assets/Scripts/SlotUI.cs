@@ -15,7 +15,7 @@ public class SlotUI : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             // Mostrar menú contextual con la posición del ratón
-            ContextMenuUI.Instance.Show(slotData, Input.mousePosition);
+            //ContextMenuUI.Instance.Show(slotData, Input.mousePosition);
         }
     }
 }
