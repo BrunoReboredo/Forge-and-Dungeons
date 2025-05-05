@@ -15,5 +15,6 @@ public class PlayerEquipment : MonoBehaviour
 
         // Instanciar nueva arma en la mano del jugador
         currentWeapon = Instantiate(newWeaponPrefab, weaponHolder.position, weaponHolder.rotation, weaponHolder);
+        currentWeapon.transform.localScale = Vector3.one * 25f;
     }
 }
