@@ -30,7 +30,7 @@ public class EntranceMineTriggers : MonoBehaviour
             }
             else if (CompareTag("Ladder"))
             {
-                sceneToLoad = "Level1";
+                sceneToLoad = "DemoLevel";
                 promptText.text = "Pulsa ENTER para entrar a la mina";
             }
 
