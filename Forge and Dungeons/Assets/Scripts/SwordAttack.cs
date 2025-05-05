@@ -7,33 +7,20 @@ public class SwordAttack : MonoBehaviour
     [SerializeField] float attackRadius = 1.2f;
     [SerializeField] float attackDamage = 10f;
     [SerializeField] LayerMask enemyLayer;
-    [SerializeField] Transform attackPoint; // Un Empty en frente del personaje
+    [SerializeField] Transform attackPoint;
 
-    [SerializeField] GameObject PHArrow; //para que saque un prefab PLACEHOLDER como si fuera la espada
+
 
     private bool canAttack = true;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // 0 = botón izquierdo del ratón
-        {
-            Debug.Log("¡Botón izquierdo del ratón presionado!");
-
-            if (attackPoint != null && PHArrow != null)
-            {
-                // Instancia el prefab
-                GameObject arrowInstance = Instantiate(PHArrow, attackPoint.position, attackPoint.rotation);
-
-                // Destruye el prefab a los 2 segundos
-                Destroy(arrowInstance, 2f);
+        /* if (Input.GetMouseButtonDown(0)) // 0 = botón izquierdo del ratón
+         {
+             Debug.Log("¡Botón izquierdo del ratón presionado!");
+         }*/
 
 
-            }
-            else
-            {
-                Debug.LogWarning("Falta asignar el attackPoint o el prefab PHArrow.");
-            }
-        }
     }
 
     void PerformAttack()
@@ -48,7 +35,7 @@ public class SwordAttack : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
         }
 
-        // Cooldown de ejemplo
+        // Cooldown
         Invoke(nameof(ResetAttack), 0.3f);
     }
 

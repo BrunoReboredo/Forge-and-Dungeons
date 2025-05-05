@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] Image backgroundImage;
     [SerializeField] Vector2 cellSize = new Vector2(30, 30);
 
-    [SerializeField] MonoBehaviour playerController; // <-- Referencia al script del jugador (PlayerMovement, PlayerAttack...)
+    [SerializeField] MonoBehaviour playerController;
 
     private bool isInventoryOpen = false;
 

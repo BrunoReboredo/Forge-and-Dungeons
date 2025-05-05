@@ -17,8 +17,8 @@ public class OptionsMenuManager : MonoBehaviour
     public void OpenOptionsMenu()
     {
         optionsMenuUI.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;  // Desbloquea el cursor
-        Cursor.visible = true;  // Hace visible el cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         // Desactiva la interfaz del jugador
         if (playerUI != null)
@@ -31,10 +31,10 @@ public class OptionsMenuManager : MonoBehaviour
     {
         optionsMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor (ya que vamos de nuevo al menú de pausa)
-        Cursor.visible = false;  // Oculta el cursor
+        Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor de vuelta
+        Cursor.visible = false;
 
-        // Comprobamos si estamos en la escena del título
+        // Compprueba si esta en la escena del título
         if (SceneManager.GetActiveScene().name != "TitleScreen")
         {
             Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor si no estamos en la escena del título
@@ -50,7 +50,7 @@ public class OptionsMenuManager : MonoBehaviour
             playerUI.SetActive(true);
         }
 
-        PauseMenuManager.Instance.ResumeGame();  // Vuelve al estado del juego en pausa
+        PauseMenuManager.Instance.ResumeGame();
     }
     public bool IsOptionsOpen()
     {

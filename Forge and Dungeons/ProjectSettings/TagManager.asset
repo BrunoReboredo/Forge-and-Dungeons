@@ -9,6 +9,8 @@ TagManager:
   - Copper
   - Iron
   - Titanium
+  - Door
+  - Ladder
   layers:
   - Default
   - TransparentFX
