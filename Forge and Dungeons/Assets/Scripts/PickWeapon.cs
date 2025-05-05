@@ -3,18 +3,20 @@ using TMPro;
 
 public class PickupWeapon : MonoBehaviour
 {
-    public GameObject weaponPrefab;
+    [SerializeField] GameObject weaponPrefab;
+    [SerializeField] Transform weaponHolder;
     private bool playerInRange = false;
 
-    private GameObject equipHintUI; // Referencia al mensaje de texto
+    private GameObject PickWeapon; // Referencia al mensaje de texto
 
     private void Start()
     {
         // Busca el objeto de texto por nombre o etiqueta
-        equipHintUI = GameObject.Find("EquipHintText");
-        if (equipHintUI != null)
+        PickWeapon = GameObject.Find("PickWeapon");
+        if (PickWeapon != null)
         {
-            equipHintUI.SetActive(false); // Por si acaso
+            PickWeapon.SetActive(false); // Por si acaso
+            Debug.Log("Texto encontrado y ocultado.");
         }
     }
 
@@ -23,9 +25,10 @@ public class PickupWeapon : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            if (equipHintUI != null)
+            if (PickWeapon != null)
             {
-                equipHintUI.SetActive(true);
+                Debug.Log("Jugador entró al trigger.");
+                PickWeapon.SetActive(true);
             }
         }
     }
@@ -35,9 +38,9 @@ public class PickupWeapon : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            if (equipHintUI != null)
+            if (PickWeapon != null)
             {
-                equipHintUI.SetActive(false);
+                PickWeapon.SetActive(false);
             }
         }
     }
@@ -46,6 +49,7 @@ public class PickupWeapon : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.Q))
         {
+            Debug.Log("Q presionada y jugador dentro del trigger.");
             EquipWeapon();
         }
     }
@@ -55,12 +59,14 @@ public class PickupWeapon : MonoBehaviour
         PlayerEquipment playerEquipment = Object.FindFirstObjectByType<PlayerEquipment>();
         if (playerEquipment != null)
         {
-            playerEquipment.EquipNewWeapon(weaponPrefab);
-            if (equipHintUI != null)
+            playerEquipment.EquipNewWeapon(weaponPrefab); // Usa el serialized field
+            if (PickWeapon != null)
             {
-                equipHintUI.SetActive(false); // Ocultar el mensaje
+                Debug.Log("paso por aqui");
+                PickWeapon.SetActive(false); // Ocultar el mensaje
             }
-            Destroy(gameObject);
+            Destroy(gameObject); // Elimina el objeto recogido
         }
     }
+
 }
