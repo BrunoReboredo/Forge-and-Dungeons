@@ -49,8 +49,8 @@ public class PauseMenuManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;  // Restaura el tiempo normal
         pauseMenuUI.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;  // Bloquea el cursor cuando vuelve a jugar
-        Cursor.visible = false;  // Oculta el cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public bool IsPaused()

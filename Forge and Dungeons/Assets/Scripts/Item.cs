@@ -51,7 +51,7 @@ public class Item
             //drops enemigos
 
             default:
-                return ItemCategory.Mineral; // Por defecto
+                return ItemCategory.Mineral;
         }
     }
 }
