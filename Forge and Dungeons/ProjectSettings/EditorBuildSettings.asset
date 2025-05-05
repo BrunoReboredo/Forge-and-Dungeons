@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EntranceMine.unity
     guid: 1713b27d713eb3341a06169b066261b4
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/DemoLevel.unity
     guid: 0f614f63d7ac2a243ac697e93ca4bf1e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

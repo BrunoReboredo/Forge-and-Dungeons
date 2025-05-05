@@ -11,6 +11,10 @@ TagManager:
   - Titanium
   - Door
   - Ladder
+  - Sword
+  - Spear
+  - Hammer
+  - Axe
   layers:
   - Default
   - TransparentFX
