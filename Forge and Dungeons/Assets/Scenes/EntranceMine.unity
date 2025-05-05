@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 616418279}
   - component: {fileID: 616418280}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Abbys
   m_TagString: Ladder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1516,7 +1516,7 @@ GameObject:
   - component: {fileID: 896508945}
   - component: {fileID: 896508944}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: UpDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,7 +1733,7 @@ GameObject:
   - component: {fileID: 950474378}
   - component: {fileID: 950474377}
   m_Layer: 0
-  m_Name: Point Light (1)
+  m_Name: AbbysLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2329,7 +2329,7 @@ GameObject:
   - component: {fileID: 1334917887}
   - component: {fileID: 1334917886}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: Door Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3881,8 +3881,8 @@ SceneRoots:
   - {fileID: 278113268}
   - {fileID: 1907183189}
   - {fileID: 896508947}
-  - {fileID: 1334917888}
   - {fileID: 950474379}
+  - {fileID: 1334917888}
   - {fileID: 2009494294}
   - {fileID: 656510120}
   - {fileID: 1908926419}
