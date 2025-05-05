@@ -12,25 +12,34 @@ public class EntranceMineTriggers : MonoBehaviour
 
     void Start()
     {
-
+        // Asegúrate de ocultar el texto al inicio
+        if (promptText != null)
+        {
+            promptText.gameObject.SetActive(false);
+        }
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (CompareTag("door"))
+            if (CompareTag("Door"))
             {
-                sceneToLoad = "MainMenu";
+                sceneToLoad = "TitleScreen";
                 promptText.text = "Pulsa ENTER para volver al menú";
             }
-            else if (CompareTag("ladder"))
+            else if (CompareTag("Ladder"))
             {
-                sceneToLoad = "Nivel1";
+                sceneToLoad = "Level1";
                 promptText.text = "Pulsa ENTER para entrar a la mina";
             }
 
             playerInside = true;
+
+            if (promptText != null)
+            {
+                promptText.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -39,6 +48,11 @@ public class EntranceMineTriggers : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInside = false;
+
+            if (promptText != null)
+            {
+                promptText.gameObject.SetActive(false);
+            }
         }
     }
 
