@@ -52,7 +52,6 @@ public class InteractiveMineral : MonoBehaviour
         {
             messageText.text = show ? actionMessage : "";
             messageText.gameObject.SetActive(show);
-            Debug.Log(show ? actionMessage : "Mensaje oculto");
         }
     }
 
@@ -65,7 +64,6 @@ public class InteractiveMineral : MonoBehaviour
             miningAudioSource.loop = true;
             miningAudioSource.Play();
         }
-        Debug.Log("Minando: " + gameObject.tag);
         messageText.text = "Minando... (pulsa F para cancelar)";
         miningCoroutine = StartCoroutine(MiningRoutine());
     }
@@ -79,7 +77,6 @@ public class InteractiveMineral : MonoBehaviour
         if (miningCoroutine != null)
             StopCoroutine(miningCoroutine);
 
-        Debug.Log("Minería cancelada");
         messageText.text = isPlayerInRange ? actionMessage : "";
         messageText.gameObject.SetActive(isPlayerInRange);
     }
@@ -99,11 +96,9 @@ public class InteractiveMineral : MonoBehaviour
                     Inventory.Instance.AddItem(new Item(type));
 
                 currentExtractions++;
-                Debug.Log($"Extracción {currentExtractions}/{maxExtractions}: +{amount} {type}");
 
                 if (currentExtractions >= maxExtractions)
                 {
-                    Debug.Log("Veta agotada");
                     messageText.text = "Veta agotada";
                     messageText.gameObject.SetActive(true); // Por si estaba oculto
 
@@ -123,7 +118,6 @@ public class InteractiveMineral : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Tag del mineral no reconocido: " + gameObject.tag);
                 StopMining();
                 yield break;
             }

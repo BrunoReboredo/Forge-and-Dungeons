@@ -15,7 +15,7 @@ public class BatSpawner : MonoBehaviour
 
     private float spawnDistance = 8f; // Distancia alrededor de la cámara donde spawnearán los enemigos
     private float spawnHeight = 2f; // Altura a la que aparecerán los murciélagos
-    private float maxAttempts = 10f; // Número máximo de intentos para encontrar una posición válida
+    private float maxAttempts = 10f; // Número máximo de intentos para encontrar una posición válida //TESTEO
 
     void Start()
     {
@@ -61,9 +61,6 @@ public class BatSpawner : MonoBehaviour
                 attempts++; // Incrementar el contador de intentos
             }
         }
-
-        // Si no se pudo encontrar una posición válida tras varios intentos, mostrar advertencia
-        Debug.LogWarning("No se pudo encontrar una posición válida para el murcielago después de varios intentos.");
     }
 
     Vector3 GetSpawnPosition()

@@ -39,12 +39,10 @@ public class WeaponAttack : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log($"Atacando con {stats.weaponType} de {stats.materialType}");
 
         switch (stats.weaponType)
         {
             case WeaponType.Sword:
-                Debug.Log("paso por aqui");
                 PerformMeleeAttack(stats.range, stats.baseDamage);
                 attackCooldown = 1f / stats.attackRate;
                 break;
@@ -72,13 +70,10 @@ public class WeaponAttack : MonoBehaviour
     {
         Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, range);
 
-        Debug.Log($"Buscando enemigos en rango {range}. Detectados: {hitColliders.Length}");
-
         foreach (Collider collider in hitColliders)
         {
             if (collider.CompareTag("Enemy"))
             {
-                Debug.Log("¡Enemigo detectado! " + collider.name);
 
                 EnemyHealth health = collider.GetComponent<EnemyHealth>();
                 if (health == null)
@@ -87,11 +82,6 @@ public class WeaponAttack : MonoBehaviour
                 if (health != null)
                 {
                     health.TakeDamage(damage);
-                    Debug.Log("Daño aplicado: " + damage);
-                }
-                else
-                {
-                    Debug.LogWarning("EnemyHealth no encontrado en " + collider.name);
                 }
             }
         }
@@ -118,10 +108,6 @@ public class WeaponAttack : MonoBehaviour
         {
             currentWeaponModel = Instantiate(modelToEquip, weaponHolder.transform.position, weaponHolder.transform.rotation);
             currentWeaponModel.transform.SetParent(weaponHolder.transform);
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el prefab para el arma equipada.");
         }
     }
 

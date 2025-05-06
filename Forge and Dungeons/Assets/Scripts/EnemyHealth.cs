@@ -17,19 +17,17 @@ public class EnemyHealth : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void TakeDamage(float amount) // Usamos float para compatibilidad con daño de arma
+    public void TakeDamage(float amount)
     {
         if (isRegenerating) return;
 
-        currentHealth -= Mathf.RoundToInt(amount); // Convertimos float a int
+        currentHealth -= Mathf.RoundToInt(amount);
         if (currentHealth < 0) currentHealth = 0;
 
-        Debug.Log($"Objeto dañado. Vida restante: {currentHealth}");
         UpdateHealthBar();
 
         if (currentHealth == 0)
         {
-            Debug.Log("Objeto destruido. Comenzando regeneración...");
             StartCoroutine(Regenerate());
         }
     }
@@ -40,7 +38,6 @@ public class EnemyHealth : MonoBehaviour
         yield return new WaitForSeconds(3f); // Tiempo para regenerar
         currentHealth = maxHealth;
         isRegenerating = false;
-        Debug.Log("Objeto regenerado.");
         UpdateHealthBar();
     }
 
@@ -53,14 +50,12 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    // Este método se usará si el objeto tiene un collider y recibe golpes
     private void OnCollisionEnter(Collision collision)
     {
-        // Comprobamos si el objeto colisionado tiene una etiqueta de "Sword" o "Enemy"
         if (collision.gameObject.CompareTag("Sword"))
         {
-            // Aplica daño al recibir un golpe con la espada
-            TakeDamage(100); // Ajusta el valor de daño según sea necesario
+            // no me acuerdo por q esta pero como funciona bien con los daños de cada arma no tocar
+            TakeDamage(100);
         }
     }
 }

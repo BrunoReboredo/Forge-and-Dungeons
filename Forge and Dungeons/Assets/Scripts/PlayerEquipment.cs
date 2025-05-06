@@ -2,25 +2,25 @@ using UnityEngine;
 
 public class PlayerEquipment : MonoBehaviour
 {
-    public Transform weaponHolder; // Lugar donde se instancian las armas (ej: mano del jugador)
+    public Transform weaponHolder; // Lugar donde se instancian las armas
     private GameObject currentWeapon;
     private WeaponAttack weaponAttack; // Referencia a WeaponAttack para actualizar stats
 
     void Start()
     {
-        // Obtener referencia a WeaponAttack en el mismo GameObject del jugador
+        // Obtener referencia a WeaponAttack
         weaponAttack = GetComponent<WeaponAttack>();
     }
 
     public void EquipNewWeapon(GameObject newWeaponPrefab)
     {
-        // Destruir el arma anterior si existe
+        // Destruir el arma anterior si existiese
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);
         }
 
-        // Instanciar nueva arma en la mano del jugador
+        // Instanciar nueva arma en la "mano" del jugador
         currentWeapon = Instantiate(newWeaponPrefab, weaponHolder.position, weaponHolder.rotation, weaponHolder);
         currentWeapon.transform.localScale = Vector3.one * 25f;
 
@@ -33,12 +33,8 @@ public class PlayerEquipment : MonoBehaviour
             // Asignar los stats de la nueva arma al WeaponAttack
             weaponAttack.stats = weaponInstance.stats;
 
-            // Equipar el modelo del arma (si es necesario)
+            // Equipar el modelo del arma
             weaponAttack.EquipWeaponModel();
-        }
-        else
-        {
-            Debug.LogWarning("La nueva arma no tiene WeaponInstance o stats asignados.");
         }
     }
 }

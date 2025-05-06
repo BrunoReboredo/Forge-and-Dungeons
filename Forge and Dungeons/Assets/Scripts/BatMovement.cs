@@ -16,10 +16,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
         {
             target = targetObject.transform;
         }
-        else
-        {
-            Debug.LogError("No se encontró un objeto con la etiqueta " + targetTag);
-        }
     }
 
     void Update()

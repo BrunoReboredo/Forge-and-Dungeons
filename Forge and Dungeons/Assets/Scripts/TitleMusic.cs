@@ -14,7 +14,6 @@ public class TitleMusicPlayer : MonoBehaviour
         audioSource.loop = true;
         audioSource.playOnAwake = false;
 
-        // Asegúrate de que el AudioSource esté en el grupo correcto del AudioMixer
         audioSource.outputAudioMixerGroup = GeneralAudioManager.Instance.GetMixerGroup();
 
         audioSource.Play();

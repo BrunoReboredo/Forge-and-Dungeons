@@ -11,11 +11,6 @@ public class CamaraFollow : MonoBehaviour
         if (player == null)
         {
             player = GameObject.FindWithTag("Player")?.transform;
-
-            if (player == null)
-            {
-                Debug.LogError("No se encontró un objeto con la etiqueta 'Player'. Asegúrate de que el jugador tenga esa etiqueta.");
-            }
         }
     }
 

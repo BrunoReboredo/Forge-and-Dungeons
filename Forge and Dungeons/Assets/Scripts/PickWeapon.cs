@@ -17,7 +17,6 @@ public class PickupWeapon : MonoBehaviour
         if (PickWeapon != null)
         {
             PickWeapon.SetActive(false); // Por si acaso
-            Debug.Log("Texto encontrado y ocultado.");
         }
     }
 
@@ -28,7 +27,6 @@ public class PickupWeapon : MonoBehaviour
             playerInRange = true;
             if (PickWeapon != null)
             {
-                Debug.Log("Jugador entró al trigger.");
                 PickWeapon.SetActive(true);
             }
         }
@@ -50,7 +48,6 @@ public class PickupWeapon : MonoBehaviour
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("Q presionada y jugador dentro del trigger.");
             EquipWeapon();
         }
     }
@@ -60,11 +57,10 @@ public class PickupWeapon : MonoBehaviour
         PlayerEquipment playerEquipment = Object.FindFirstObjectByType<PlayerEquipment>();
         if (playerEquipment != null)
         {
-            playerEquipment.EquipNewWeapon(weaponPrefab); // Usa el serialized field
+            playerEquipment.EquipNewWeapon(weaponPrefab);
             if (PickWeapon != null)
             {
-                Debug.Log("paso por aqui");
-                PickWeapon.SetActive(false); // Ocultar el mensaje
+                PickWeapon.SetActive(false);
             }
 
             // Llamar a la corutina para hacer el objeto invisible y luego visible
@@ -77,7 +73,7 @@ public class PickupWeapon : MonoBehaviour
         // Haz el objeto invisible
         gameObject.SetActive(false);
 
-        // Espera un tiempo determinado (por ejemplo, 5 segundos)
+        // Espera un tiempo determinado
         yield return new WaitForSeconds(5f);
 
         // Vuelve a hacerlo visible
