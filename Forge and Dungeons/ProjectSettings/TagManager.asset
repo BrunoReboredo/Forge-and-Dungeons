@@ -16,6 +16,7 @@ TagManager:
   - Hammer
   - Axe
   - Enemy
+  - EndGame
   layers:
   - Default
   - TransparentFX
