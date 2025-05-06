@@ -9,7 +9,7 @@ public class EndGame : MonoBehaviour
         {
             if (CompareTag("EndGame"))
             {
-                SceneManager.LoadScene("");
+                SceneManager.LoadScene("EndGame");
             }
 
         }

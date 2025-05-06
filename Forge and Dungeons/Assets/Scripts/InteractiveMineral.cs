@@ -6,7 +6,8 @@ public class InteractiveMineral : MonoBehaviour
 {
     public string actionMessage = "Pulsa F para minar";
     public TextMeshProUGUI messageText;
-
+    [SerializeField] private AudioClip miningClip;
+    [SerializeField] private AudioSource miningAudioSource;
     private bool isPlayerInRange = false;
     private bool isMining = false;
     private Coroutine miningCoroutine;
@@ -58,6 +59,12 @@ public class InteractiveMineral : MonoBehaviour
     void StartMining()
     {
         isMining = true;
+        if (miningAudioSource != null && miningClip != null)
+        {
+            miningAudioSource.clip = miningClip;
+            miningAudioSource.loop = true;
+            miningAudioSource.Play();
+        }
         Debug.Log("Minando: " + gameObject.tag);
         messageText.text = "Minando... (pulsa F para cancelar)";
         miningCoroutine = StartCoroutine(MiningRoutine());
@@ -65,7 +72,10 @@ public class InteractiveMineral : MonoBehaviour
 
     void StopMining()
     {
+
         isMining = false;
+        if (miningAudioSource != null && miningAudioSource.isPlaying)
+            miningAudioSource.Stop();
         if (miningCoroutine != null)
             StopCoroutine(miningCoroutine);
 
@@ -95,8 +105,20 @@ public class InteractiveMineral : MonoBehaviour
                 {
                     Debug.Log("Veta agotada");
                     messageText.text = "Veta agotada";
-                    yield return new WaitForSeconds(1f);
+                    messageText.gameObject.SetActive(true); // Por si estaba oculto
+
+                    if (miningAudioSource != null && miningAudioSource.isPlaying)
+                        miningAudioSource.Stop();
+
+                    isMining = false;
+                    isPlayerInRange = false;
+                    GetComponent<Collider>().enabled = false;
+
+                    // Esperar 2 segundos antes de destruir el objeto
+                    yield return new WaitForSeconds(2f);
+
                     Destroy(gameObject);
+                    yield break;
                 }
             }
             else
