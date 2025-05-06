@@ -10,8 +10,7 @@ public class TitleScreen : MonoBehaviour
 
     public void LoadGame()
     {
-        Debug.Log("Función de carga aún no implementada");
-        // Aquí se carga el sistema de guardado, pendiente de implementar
+        // Implementar funcion de guardado
     }
 
     public void OpenOptions()

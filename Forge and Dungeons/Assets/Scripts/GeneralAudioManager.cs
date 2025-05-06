@@ -27,9 +27,17 @@ public class GeneralAudioManager : MonoBehaviour
     {
         // Slider va de 0 a 1. El volumen en decibelios va de -80 a 0.
         float dB = Mathf.Log10(Mathf.Clamp(volume, 0.001f, 1)) * 20;
-        audioMixer.SetFloat("MasterVolume", dB);
+        audioMixer.SetFloat("Master", dB);
 
         // Guardar el valor para la próxima vez
         PlayerPrefs.SetFloat("Volume", volume);
     }
+
+    [SerializeField] private AudioMixerGroup masterMixerGroup;
+
+    public AudioMixerGroup GetMixerGroup()
+    {
+        return masterMixerGroup;
+    }
+
 }

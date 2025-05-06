@@ -5,7 +5,7 @@ public class PlayerHUD : MonoBehaviour
 {
     [Header("Sliders")]
     public Slider healthSlider;
-    public Slider specialSlider;
+    // public Slider specialSlider;
 
     [Header("Player Stats")]
     public PlayerStats playerStats;
@@ -15,7 +15,7 @@ public class PlayerHUD : MonoBehaviour
         if (playerStats != null)
         {
             healthSlider.value = playerStats.currentHealth / playerStats.maxHealth;
-            specialSlider.value = playerStats.currentSpecial / playerStats.maxSpecial;
+            // specialSlider.value = playerStats.currentSpecial / playerStats.maxSpecial;
         }
     }
 }

@@ -11,6 +11,12 @@ TagManager:
   - Titanium
   - Door
   - Ladder
+  - Sword
+  - Spear
+  - Hammer
+  - Axe
+  - Enemy
+  - EndGame
   layers:
   - Default
   - TransparentFX
