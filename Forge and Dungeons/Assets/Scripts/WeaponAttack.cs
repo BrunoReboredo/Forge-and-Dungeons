@@ -33,7 +33,6 @@ public class WeaponAttack : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f)
         {
-            //Debug.Log("paso por aqui");
             Attack();
         }
     }
@@ -45,6 +44,7 @@ public class WeaponAttack : MonoBehaviour
         switch (stats.weaponType)
         {
             case WeaponType.Sword:
+                Debug.Log("paso por aqui");
                 PerformMeleeAttack(stats.range, stats.baseDamage);
                 attackCooldown = 1f / stats.attackRate;
                 break;
@@ -70,13 +70,33 @@ public class WeaponAttack : MonoBehaviour
 
     void PerformMeleeAttack(float range, float damage)
     {
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, range, enemyLayer);
+        Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, range);
 
-        foreach (Collider enemy in hitEnemies)
+        Debug.Log($"Buscando enemigos en rango {range}. Detectados: {hitColliders.Length}");
+
+        foreach (Collider collider in hitColliders)
         {
-            enemy.GetComponent<EnemyHealth>()?.TakeDamage(damage);
+            if (collider.CompareTag("Enemy"))
+            {
+                Debug.Log("¡Enemigo detectado! " + collider.name);
+
+                EnemyHealth health = collider.GetComponent<EnemyHealth>();
+                if (health == null)
+                    health = collider.GetComponentInParent<EnemyHealth>();
+
+                if (health != null)
+                {
+                    health.TakeDamage(damage);
+                    Debug.Log("Daño aplicado: " + damage);
+                }
+                else
+                {
+                    Debug.LogWarning("EnemyHealth no encontrado en " + collider.name);
+                }
+            }
         }
     }
+
 
     public void EquipWeaponModel()
     {

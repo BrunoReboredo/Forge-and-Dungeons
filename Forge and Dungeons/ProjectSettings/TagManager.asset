@@ -15,6 +15,7 @@ TagManager:
   - Spear
   - Hammer
   - Axe
+  - Enemy
   layers:
   - Default
   - TransparentFX
