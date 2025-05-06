@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class PickupWeapon : MonoBehaviour
 {
@@ -65,8 +66,22 @@ public class PickupWeapon : MonoBehaviour
                 Debug.Log("paso por aqui");
                 PickWeapon.SetActive(false); // Ocultar el mensaje
             }
-            Destroy(gameObject); // Elimina el objeto recogido
+
+            // Llamar a la corutina para hacer el objeto invisible y luego visible
+            StartCoroutine(MakeWeaponInvisible());
         }
+    }
+
+    private IEnumerator MakeWeaponInvisible()
+    {
+        // Haz el objeto invisible
+        gameObject.SetActive(false);
+
+        // Espera un tiempo determinado (por ejemplo, 5 segundos)
+        yield return new WaitForSeconds(5f);
+
+        // Vuelve a hacerlo visible
+        gameObject.SetActive(true);
     }
 
 }

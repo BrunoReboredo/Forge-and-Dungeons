@@ -4,7 +4,7 @@ using System;
 
 public class WeaponAttack : MonoBehaviour
 {
-    [SerializeField] private WeaponStats stats;
+    public WeaponStatsSO stats;
     [SerializeField] Transform attackPoint;
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] GameObject weaponHolder;
@@ -17,13 +17,15 @@ public class WeaponAttack : MonoBehaviour
 
     void Start()
     {
-        EquipWeaponModel();
         WeaponInstance weapon = weaponHolder.GetComponentInChildren<WeaponInstance>();
-        if (weapon != null)
+
+        if (weapon != null && weapon.stats != null)
         {
             stats = weapon.stats;
             EquipWeaponModel();
         }
+        // EquipWeaponModel();
+
     }
 
     void Update()
@@ -32,6 +34,7 @@ public class WeaponAttack : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && attackCooldown <= 0f)
         {
+            //Debug.Log("paso por aqui");
             Attack();
         }
     }
@@ -43,26 +46,28 @@ public class WeaponAttack : MonoBehaviour
         switch (stats.weaponType)
         {
             case WeaponType.Sword:
-                PerformMeleeAttack(stats.range, stats.GetDamage());
+                PerformMeleeAttack(stats.range, stats.baseDamage);
                 attackCooldown = 1f / stats.attackRate;
                 break;
 
             case WeaponType.Spear:
-                PerformMeleeAttack(stats.range + 1f, stats.GetDamage() * 0.9f);
+                PerformMeleeAttack(stats.range + 1f, stats.baseDamage * 0.9f);
                 attackCooldown = 1f / stats.attackRate;
                 break;
 
             case WeaponType.Axe:
-                PerformMeleeAttack(stats.range * 0.8f, stats.GetDamage() * 1.5f);
+                PerformMeleeAttack(stats.range * 0.8f, stats.baseDamage * 1.5f);
                 attackCooldown = 1.5f;
                 break;
 
             case WeaponType.Hammer:
-                PerformMeleeAttack(stats.range * 0.8f, stats.GetDamage() * 1.3f);
+                PerformMeleeAttack(stats.range * 0.8f, stats.baseDamage * 1.3f);
                 attackCooldown = 0.8f;
                 break;
         }
+
     }
+
 
     void PerformMeleeAttack(float range, float damage)
     {
@@ -110,10 +115,10 @@ public class WeaponAttack : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, stats.range);
     }
 
-    internal void SetWeapon(WeaponStats stats)
+    /*internal void SetWeapon(WeaponStatsSO stats)
     {
         throw new NotImplementedException();
-    }
+    }*/
 
     [System.Serializable]
     public class WeaponModelEntry
@@ -125,9 +130,7 @@ public class WeaponAttack : MonoBehaviour
 
     public class WeaponInstance : MonoBehaviour
     {
-        public WeaponStats stats;
+        public WeaponStatsSO stats;
     }
-
-
 
 }

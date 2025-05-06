@@ -26,12 +26,12 @@ public class EntranceMineTriggers : MonoBehaviour
             if (CompareTag("Door"))
             {
                 sceneToLoad = "TitleScreen";
-                promptText.text = "Pulsa ENTER para volver al menú";
+                // promptText.text = "Pulsa ENTER para volver al menú";
             }
             else if (CompareTag("Ladder"))
             {
                 sceneToLoad = "DemoLevel";
-                promptText.text = "Pulsa ENTER para entrar a la mina";
+                //promptText.text = "Pulsa ENTER para entrar a la mina";
             }
 
             playerInside = true;
