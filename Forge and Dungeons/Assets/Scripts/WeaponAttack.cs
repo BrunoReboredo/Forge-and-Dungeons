@@ -24,7 +24,6 @@ public class WeaponAttack : MonoBehaviour
             stats = weapon.stats;
             EquipWeaponModel();
         }
-        // EquipWeaponModel();
 
     }
 
@@ -79,7 +78,7 @@ public class WeaponAttack : MonoBehaviour
         }
     }
 
-    void EquipWeaponModel()
+    public void EquipWeaponModel()
     {
         if (currentWeaponModel != null)
             Destroy(currentWeaponModel);
@@ -115,10 +114,12 @@ public class WeaponAttack : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, stats.range);
     }
 
-    /*internal void SetWeapon(WeaponStatsSO stats)
+    public void SetWeapon(WeaponStatsSO newStats)
     {
-        throw new NotImplementedException();
-    }*/
+        stats = newStats;
+        EquipWeaponModel();
+    }
+
 
     [System.Serializable]
     public class WeaponModelEntry
